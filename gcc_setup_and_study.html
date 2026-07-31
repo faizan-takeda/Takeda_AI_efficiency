@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Four Challenges: Takeda Transformation Brief</title>
+<meta name="description" content="Four challenges, one root cause. Evidence from Google, Amazon, Bain transformation economics and seventy years of pharma R&D data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fff; --paper2:#F7F8F9; --paper3:#F0F2F4;
+  --ink:#10161F; --ink2:#37414D; --ink3:#5F6B78; --ink4:#8D97A2;
+  --rule:#E2E6EA; --rule2:#EEF0F3;
+  --teal:#00736B; --teal-b:#E5F0EF;
+  --rust:#B4451F; --rust-b:#FBEEE9;
+  --grey:#A8B3BE;
+  --disp:"Fraunces",Georgia,serif;
+  --sans:"Inter",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+  --e:cubic-bezier(.2,.7,.3,1);
+  --prose:680px; --wide:1180px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink2);font-family:var(--sans);
+  font-size:17px;line-height:1.68;-webkit-font-smoothing:antialiased;font-feature-settings:"kern" 1;overflow-x:hidden}
+h1,h2,h3,h4{font-family:var(--disp);font-weight:600;color:var(--ink);
+  font-variation-settings:"SOFT" 0,"WONK" 0;letter-spacing:-.015em;line-height:1.12;margin:0}
+p{margin:0}
+svg{display:block;overflow:visible}
+::selection{background:var(--teal);color:#fff}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.num{font-variant-numeric:tabular-nums}
+
+/* ---------- shell ---------- */
+.shell{max-width:var(--wide);margin:0 auto;padding:0 36px}
+.prose{max-width:var(--prose)}
+.mono{font-family:var(--mono);font-weight:500;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase}
+.kick{display:flex;align-items:center;gap:11px;color:var(--ink4)}
+.kick::before{content:"";width:24px;height:1px;background:var(--teal);flex:none}
+@media(max-width:760px){.shell{padding:0 20px}}
+
+/* progress + index */
+.bar{position:fixed;inset:0 auto auto 0;height:2px;background:var(--teal);z-index:20;width:0}
+.idx{position:fixed;left:26px;top:50%;transform:translateY(-50%);z-index:15;display:none}
+@media(min-width:1460px){.idx{display:block}}
+.idx a{display:block;text-decoration:none;padding:7px 0;border-left:2px solid var(--rule);padding-left:12px;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink4);
+  transition:color .3s,border-color .3s;max-width:132px}
+.idx a:hover{color:var(--ink2)}
+.idx a[aria-current=true]{color:var(--ink);border-color:var(--teal)}
+
+/* ---------- hero ---------- */
+.hero{padding:132px 0 96px}
+.hero h1{font-size:clamp(40px,6vw,82px);letter-spacing:-.032em;margin:24px 0 0;max-width:16ch}
+.hero h1 em{font-style:italic;color:var(--teal)}
+.hero__sub{margin-top:28px;font-size:clamp(17px,1.35vw,20px);color:var(--ink3);max-width:56ch;line-height:1.6}
+.hero__grid{display:grid;gap:56px;margin-top:64px;align-items:end}
+@media(min-width:960px){.hero__grid{grid-template-columns:1fr 420px;gap:72px}}
+.figset{display:flex;gap:0;border-top:1px solid var(--ink);flex-wrap:wrap}
+.fig{flex:1 1 0;min-width:132px;padding:16px 20px 0 0}
+.fig+.fig{padding-left:20px;border-left:1px solid var(--rule)}
+.fig b{display:block;font-family:var(--disp);font-size:clamp(34px,3.6vw,46px);color:var(--ink);line-height:.98;letter-spacing:-.03em}
+.fig span{display:block;margin-top:9px;font-size:13px;color:var(--ink3);line-height:1.4}
+.fig cite{display:block;margin-top:6px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);font-style:normal}
+.root{margin-top:40px;padding-left:18px;border-left:2px solid var(--teal);max-width:56ch}
+.root p{font-family:var(--disp);font-size:clamp(18px,1.6vw,23px);color:var(--ink);line-height:1.4}
+.credit{margin-top:24px;padding-left:18px;border-left:1px solid var(--rule);font-size:14px;color:var(--ink3);max-width:56ch}
+
+/* ---------- exhibit frame ---------- */
+.ex{margin:0 auto;max-width:var(--wide)}
+.ex__top{display:flex;align-items:baseline;justify-content:space-between;gap:20px;
+  padding-bottom:12px;border-bottom:1px solid var(--ink);flex-wrap:wrap}
+.ex__t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.ex__s{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4)}
+.ex__b{padding:30px 0 0}
+.ex__cap{margin-top:20px;padding-top:14px;border-top:1px solid var(--rule);font-size:14px;color:var(--ink3);max-width:78ch}
+.ex__cap b{color:var(--ink);font-weight:600}
+.lg{display:flex;gap:22px;flex-wrap:wrap;margin-top:16px}
+.lg span{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.lg i{width:11px;height:11px;flex:none;border-radius:2px}
+
+/* animated primitives — draw once, then still */
+.wf rect{opacity:0;transition:opacity .45s var(--e)}
+.in .wf rect{opacity:1}
+.gr rect{opacity:0;transition:opacity .4s var(--e)}
+.in .gr rect{opacity:1}
+.pathdraw{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);transition:stroke-dashoffset 2.1s var(--e)}
+.in .pathdraw{stroke-dashoffset:0}
+.growx{transform:scaleX(0);transform-origin:left center;transition:transform 1.05s var(--e)}
+.in .growx{transform:scaleX(1)}
+.growy{transform:scaleY(0);transform-origin:center bottom;transition:transform .95s var(--e)}
+.in .growy{transform:scaleY(1)}
+.fadein{opacity:0;transition:opacity .7s var(--e)}
+.in .fadein{opacity:1}
+.edge{opacity:0;transition:opacity .5s var(--e),stroke .4s var(--e)}
+.in .edge{opacity:.5}
+
+/* ---------- chapters ---------- */
+.chap{padding:120px 0 24px;border-top:1px solid var(--rule)}
+.chap__h{display:flex;gap:22px;align-items:baseline}
+.chap__h b{font-family:var(--disp);font-size:clamp(40px,4.4vw,60px);color:var(--rule);line-height:.85;letter-spacing:-.04em;flex:none}
+.chap.key .chap__h b{color:var(--teal)}
+.chap h2{font-size:clamp(28px,3.5vw,46px);max-width:19ch;letter-spacing:-.026em}
+.keytag{display:inline-flex;gap:7px;margin-top:16px;font-family:var(--mono);font-size:9.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--teal);background:var(--teal-b);padding:6px 11px}
+.take{margin-top:26px;font-family:var(--disp);font-size:clamp(19px,1.9vw,26px);line-height:1.38;
+  color:var(--ink);padding-left:20px;border-left:2px solid var(--ink);max-width:44ch}
+.chap.key .take{border-left-color:var(--teal)}
+.body{margin-top:20px;font-size:16.5px;color:var(--ink3);line-height:1.72}
+.body strong{color:var(--ink);font-weight:600}
+.exwrap{margin:56px 0}
+
+/* stat rows */
+.rows{margin-top:44px;border-top:1px solid var(--ink);max-width:var(--wide)}
+.r{display:grid;grid-template-columns:132px 1fr 168px;gap:22px;padding:15px 0;border-bottom:1px solid var(--rule2);
+  align-items:baseline;opacity:0;transform:translateY(8px);transition:opacity .5s var(--e),transform .5s var(--e)}
+.r.in{opacity:1;transform:none}
+.r b{font-family:var(--disp);font-size:clamp(21px,2vw,28px);color:var(--ink);line-height:1;letter-spacing:-.025em}
+.r.cost b{color:var(--rust)} .r.good b{color:var(--teal)}
+.r p{font-size:15px;color:var(--ink3);line-height:1.5}
+.r cite{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);font-style:normal;text-align:right}
+@media(max-width:800px){.r{grid-template-columns:1fr;gap:5px}.r cite{text-align:left}}
+
+/* inspiration */
+.insp{margin-top:60px;padding-top:24px;border-top:1px solid var(--teal);max-width:var(--wide);
+  display:grid;gap:40px}
+@media(min-width:980px){.insp{grid-template-columns:300px 1fr}}
+.insp__who{font-family:var(--disp);font-size:clamp(25px,2.7vw,36px);color:var(--ink);line-height:1.1;margin-top:10px}
+.insp__body{font-size:16px;color:var(--ink3);line-height:1.7}
+.insp__body strong{color:var(--ink);font-weight:600}
+.quote{margin-top:26px;padding-left:22px;border-left:2px solid var(--teal);font-family:var(--disp);
+  font-style:italic;font-size:clamp(18px,1.8vw,23px);line-height:1.42;color:var(--ink)}
+.quote span{display:block;margin-top:10px;font-family:var(--mono);font-style:normal;font-size:9.5px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink4)}
+.earned{margin-top:26px;padding-top:16px;border-top:1px solid var(--rule);font-size:15.5px;color:var(--ink3)}
+.earned b{color:var(--teal);font-weight:600}
+
+.avoid{margin-top:52px;padding-left:20px;border-left:2px solid var(--rust);max-width:74ch}
+.avoid .mono{color:var(--rust);display:block;margin-bottom:11px}
+.avoid p{font-size:15.5px;color:var(--ink3);line-height:1.68}
+.avoid strong{color:var(--ink);font-weight:600}
+
+.say{margin-top:52px;padding:28px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);max-width:var(--wide)}
+.say .mono{color:var(--ink4);display:block;margin-bottom:16px}
+.say q{quotes:none;display:block;font-family:var(--disp);font-size:clamp(18px,1.8vw,23px);line-height:1.5;color:var(--ink);max-width:60ch}
+.analogy{margin-top:24px;font-size:15px;color:var(--ink3);font-style:italic;line-height:1.6;max-width:64ch}
+.analogy b{display:block;font-style:normal;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--teal);margin-bottom:8px}
+
+/* ---------- mechanism deep-dive (Challenge 02) ---------- */
+.mech{padding:104px 0;border-top:1px solid var(--ink);background:var(--paper2)}
+.mech h2{font-size:clamp(27px,3.5vw,46px);max-width:23ch;letter-spacing:-.028em;margin-top:16px}
+.mech h2 em{font-style:italic;color:var(--teal)}
+.mech__sub{margin-top:22px;font-size:clamp(16px,1.3vw,19px);color:var(--ink3);max-width:66ch;line-height:1.62}
+.mech__sub b{color:var(--ink);font-weight:600}
+.mech__hero{margin:48px 0 0;display:grid;gap:40px;align-items:center}
+@media(min-width:940px){.mech__hero{grid-template-columns:1.55fr 1fr;gap:52px}}
+.mech__chart{min-width:0}
+.mech__cap{margin-top:14px;padding-top:12px;border-top:1px solid var(--rule);font-size:13.5px;color:var(--ink3);line-height:1.55}
+.mech__cap b{color:var(--ink);font-weight:600}
+.mech__side{min-width:0}
+.mech__side .mono{color:var(--ink4);display:block;margin-bottom:4px}
+.qtbl{width:100%;border-collapse:collapse}
+.qtbl th{text-align:left;font-family:var(--mono);font-size:9px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--ink4);font-weight:500;padding:0 0 10px;border-bottom:1px solid var(--ink)}
+.qtbl th:last-child{text-align:right}
+.qtbl td{padding:10px 0;border-bottom:1px solid var(--rule2);font-family:var(--mono);font-size:13px;color:var(--ink3)}
+.qtbl td:last-child{text-align:right;font-family:var(--disp);font-size:18px;color:var(--ink);font-weight:600;letter-spacing:-.02em}
+.qtbl tr:last-child td{border-bottom:0}
+.qtbl tr.hot td{color:var(--rust)}
+.qtbl tr.hot td:last-child{color:var(--rust)}
+.mech__insight{margin-top:22px;padding:16px 18px;background:var(--rust-b);border-left:2px solid var(--rust)}
+.mech__insight b{font-family:var(--disp);font-size:21px;color:var(--rust);display:block;letter-spacing:-.02em;line-height:1.12}
+.mech__insight span{font-size:13.5px;color:var(--ink3);display:block;margin-top:7px;line-height:1.5}
+.mech__cols{margin-top:56px;display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule)}
+@media(min-width:820px){.mech__cols{grid-template-columns:repeat(3,1fr)}}
+.mech__col{background:var(--paper);padding:26px 24px 28px}
+.mech__col .n{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+.mech__col h3{font-size:19px;margin-top:11px;letter-spacing:-.012em;line-height:1.15}
+.mech__col p{margin-top:12px;font-size:14.5px;color:var(--ink3);line-height:1.6}
+.mech__col p b{color:var(--ink);font-weight:600}
+.taxbar{margin-top:14px;height:32px;display:flex;overflow:hidden;border:1px solid var(--rule)}
+.taxbar i{display:flex;align-items:center;justify-content:center;font-style:normal;color:#fff;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.06em}
+.taxbar .bd{background:var(--teal);flex:0 0 30%}
+.taxbar .co{background:var(--rust);flex:0 0 70%}
+.mech__punch{margin-top:52px;padding-top:24px;border-top:1px solid var(--teal);
+  font-family:var(--disp);font-size:clamp(20px,2.2vw,30px);color:var(--ink);line-height:1.32;max-width:33ch}
+.mech__punch em{font-style:italic;color:var(--teal)}
+
+/* ---------- chapter gloss ---------- */
+.gloss{margin-top:20px;padding:15px 20px;background:var(--teal-b);border-left:2px solid var(--teal);
+  font-size:15.5px;color:var(--ink2);line-height:1.6;max-width:66ch}
+.gloss b{color:var(--ink);font-weight:600}
+
+/* ---------- talent-density deep-dive (Challenge 04) ---------- */
+.dens{padding:104px 0;border-top:1px solid var(--ink);background:var(--paper2)}
+.dens h2{font-size:clamp(27px,3.5vw,46px);max-width:24ch;letter-spacing:-.028em;margin-top:16px}
+.dens h2 em{font-style:italic;color:var(--teal)}
+.dens__sub{margin-top:22px;font-size:clamp(16px,1.3vw,19px);color:var(--ink3);max-width:70ch;line-height:1.62}
+.dens__sub b{color:var(--ink);font-weight:600}
+.dens__hero{margin:48px 0 0;display:grid;gap:40px;align-items:center}
+@media(min-width:940px){.dens__hero{grid-template-columns:1.5fr .9fr;gap:48px}}
+.dens__lev{min-width:0}
+.dens__cap{margin-top:14px;padding-top:12px;border-top:1px solid var(--rule);font-size:13.5px;color:var(--ink3);line-height:1.55}
+.dens__cap b{color:var(--ink);font-weight:600}
+.dens__funnel{min-width:0}
+.fn{list-style:none;margin:0;padding:0}
+.fn li{padding:13px 0;border-bottom:1px solid var(--rule2)}
+.fn li:last-child{border-bottom:0}
+.fn li b{font-family:var(--disp);font-size:clamp(25px,2.3vw,31px);color:var(--ink);letter-spacing:-.02em;line-height:1;display:block}
+.fn li.hot b{color:var(--teal)}
+.fn li span{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink4);margin-top:6px}
+.fn li i{font-family:var(--mono);font-style:normal;font-size:10.5px;letter-spacing:.06em;color:var(--rust)}
+.dens__cols2{margin-top:54px;display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule)}
+@media(min-width:820px){.dens__cols2{grid-template-columns:1.35fr 1fr}}
+.dens__danger,.dens__regret{background:var(--paper);padding:28px 26px 30px}
+.dens__regret{background:var(--rust-b)}
+.dens__danger .mono,.dens__regret .mono{color:var(--ink4);display:block;margin-bottom:10px}
+.dens__danger h3,.dens__regret h3{font-size:19px;letter-spacing:-.012em;line-height:1.2}
+.dens__danger p,.dens__regret p{margin-top:16px;font-size:14.5px;color:var(--ink3);line-height:1.6}
+.dens__danger p b,.dens__regret p b{color:var(--ink);font-weight:600}
+.dens__stat{margin-top:16px;font-family:var(--disp);font-size:30px;color:var(--rust);letter-spacing:-.02em;line-height:1.05}
+.dens__stat span{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink4);margin-top:6px}
+.dens__bar{margin-top:54px;border:1px solid var(--rule);background:var(--paper)}
+.dens__bar-h{padding:24px 26px 0}
+.dens__bar-h .mono{color:var(--teal);display:block;margin-bottom:8px}
+.dens__bar-h h3{font-size:22px;letter-spacing:-.015em}
+.dens__bar-g{display:grid;gap:34px;padding:20px 26px 28px}
+@media(min-width:860px){.dens__bar-g{grid-template-columns:1fr 1fr;align-items:center}}
+.dens__bar-txt p{font-size:14.5px;color:var(--ink3);line-height:1.62}
+.dens__bar-txt p b{color:var(--ink);font-weight:600}
+.dens__foot{margin-top:14px;padding-top:14px;border-top:1px solid var(--rule);font-style:italic}
+.dens__foot em{color:var(--teal);font-style:italic}
+.dens__punch{margin-top:52px;padding-top:24px;border-top:1px solid var(--teal);
+  font-family:var(--disp);font-size:clamp(20px,2.2vw,30px);color:var(--ink);line-height:1.32;max-width:36ch}
+.dens__punch em{font-style:italic;color:var(--teal)}
+
+/* ---------- synthesis ---------- */
+.syn{padding:130px 0;border-top:1px solid var(--ink);background:var(--paper2)}
+.syn h2{font-size:clamp(30px,3.6vw,48px);max-width:20ch;margin-top:20px;letter-spacing:-.026em}
+.syn__root{margin-top:28px;font-family:var(--disp);font-size:clamp(19px,1.9vw,26px);line-height:1.42;color:var(--ink);max-width:52ch}
+.syn__root em{font-style:italic;color:var(--teal)}
+.dec{margin-top:56px;border-top:1px solid var(--ink)}
+.dec__r{display:grid;grid-template-columns:46px 1fr;gap:22px;padding:22px 0;border-bottom:1px solid var(--rule)}
+.dec__r b{font-family:var(--disp);font-size:26px;color:var(--teal);line-height:1}
+.dec__r h3{font-size:19px;letter-spacing:-.012em}
+.dec__r p{margin-top:8px;font-size:15px;color:var(--ink3)}
+.tbl{margin-top:64px;border-top:1px solid var(--ink);width:100%;border-collapse:collapse}
+.tbl th{text-align:left;padding:12px 14px 12px 0;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink4);font-weight:500;border-bottom:1px solid var(--rule)}
+.tbl td{padding:16px 14px 16px 0;border-bottom:1px solid var(--rule2);vertical-align:top;font-size:15px;color:var(--ink3)}
+.tbl td:first-child{font-family:var(--disp);font-size:17px;color:var(--ink);font-weight:600;width:29%}
+.tbl td:last-child{width:15%;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--rust)}
+@media(max-width:760px){.tbl thead{display:none}.tbl td{display:block;padding:4px 0;width:auto!important}
+  .tbl tr{display:block;padding:16px 0;border-bottom:1px solid var(--rule)}}
+.rule90{margin-top:48px;padding:24px 0;border-top:1px solid var(--teal);border-bottom:1px solid var(--teal);
+  font-family:var(--disp);font-size:clamp(18px,1.8vw,24px);color:var(--ink);line-height:1.42;max-width:60ch}
+
+/* ---------- speech ---------- */
+.speech{padding:140px 0 150px}
+.speech__l{font-family:var(--disp);font-size:clamp(22px,2.9vw,40px);line-height:1.32;color:var(--ink);
+  letter-spacing:-.024em;margin:0 0 10px;max-width:26ch;opacity:0;transform:translateY(12px);
+  transition:opacity .75s var(--e),transform .75s var(--e)}
+.speech__l.in{opacity:1;transform:none}
+.speech__l em{font-style:italic;color:var(--teal)}
+.speech__l.sm{font-family:var(--sans);font-size:clamp(16px,1.4vw,19px);color:var(--ink3);line-height:1.65;max-width:62ch;margin:26px 0}
+
+/* ---------- footer ---------- */
+.ft{border-top:1px solid var(--rule);padding:56px 0 70px;background:var(--paper2)}
+.ft h3{font-family:var(--sans);font-size:14px;font-weight:600;color:var(--ink);margin-bottom:14px}
+.ft p{font-size:12.5px;color:var(--ink3);line-height:1.75}
+.ft__g{display:grid;gap:32px}
+@media(min-width:860px){.ft__g{grid-template-columns:1fr 1fr}}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition-duration:.001ms!important;animation:none!important}
+  .r,.speech__l{opacity:1;transform:none}
+  .wf rect,.gr rect,.fadein{opacity:1}
+  .pathdraw{stroke-dashoffset:0}
+  .growx{transform:scaleX(1)}.growy{transform:scaleY(1)}
+  .edge{opacity:.5}
+}
+@media print{
+  .bar,.idx{display:none!important}
+  body{font-size:10.5pt;color:#000}
+  .r,.speech__l,.fadein,.wf rect,.gr rect{opacity:1!important;transform:none!important}
+  .pathdraw{stroke-dashoffset:0!important}.growx{transform:scaleX(1)!important}.growy{transform:scaleY(1)!important}
+  .chap,.syn,.speech,.exwrap{break-inside:avoid;padding:14pt 0}
+}
+</style>
+</head>
+<body>
+<div class="bar" id="bar"></div>
+<nav class="idx" id="idx" aria-label="Contents"></nav>
+
+<main>
+<!-- ══════════ HERO ══════════ -->
+<header class="hero">
+  <div class="shell">
+    <p class="mono kick">Office of the CTO · Transformation brief · July 2026</p>
+    <h1>Four challenges.<br>One <em>root cause.</em></h1>
+    <div class="hero__grid">
+      <div>
+        <p class="hero__sub">Evidence from Google and Amazon's own operating models, Bain-grade transformation economics, and seventy years of pharmaceutical R&amp;D data. Not four separate problems, but one problem wearing four different sets of clothes.</p>
+        <div class="figset">
+          <div class="fig"><b class="num"><span data-count="88">88</span>%</b><span>of transformations miss their original ambition</span><cite>Bain, Apr 2024</cite></div>
+          <div class="fig"><b class="num"><span data-count="5">5</span>%</b><span>of enterprise AI pilots produce measurable value</span><cite>MIT NANDA, Jul 2025</cite></div>
+          <div class="fig"><b class="num">Multiple</b><span>SAP instances live in our estate</span><cite>Client study</cite></div>
+        </div>
+        <div class="root"><p>Nobody owns anything end to end. The Satellite trap is missing ownership of a product. Dependency drag is missing ownership of an interface. The data estate is missing ownership of a foundation.</p></div>
+        <p class="credit"><strong>Credit where it is due.</strong> Bain finds the successful 12% "often appoint a dedicated Chief Transformation Officer." Takeda has done that. This brief concerns the four boxes not yet ticked.</p>
+      </div>
+      <div class="ex" data-ex="A">
+        <div class="ex__top"><span class="ex__t">Exhibit A · The base rate</span><span class="ex__s">n = 100</span></div>
+        <div class="ex__b" id="exA"></div>
+        <p class="ex__cap"><b>88 of every 100</b> business transformations fail to achieve their original ambition, measured against stated ambition in full. Bain estimates more than a third of large organisations are transforming at any given time.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════ EROOM ══════════ -->
+<section class="chap" id="eroom">
+  <div class="shell">
+    <p class="mono kick">The seventy-year warning</p>
+    <h2 style="max-width:24ch;margin-top:18px">Pharma has already run the experiment we are about to run</h2>
+    <p class="body prose">Every technology wave was supposed to fix R&amp;D productivity. Genomics arrived. High-throughput screening arrived. Combinatorial chemistry, computer-aided design and x-ray crystallography all became orders of magnitude cheaper. The curve below did not bend once.</p>
+    <div class="exwrap ex" data-ex="B">
+      <div class="ex__top"><span class="ex__t">Exhibit B · Eroom's Law, 1950–2010</span><span class="ex__s">Log scale · new drugs per $1B R&amp;D</span></div>
+      <div class="ex__b" id="exB"></div>
+      <div class="lg">
+        <span><i style="background:var(--ink)"></i>Observed trend</span>
+        <span><i style="background:var(--teal)"></i>Counterfactual, never tested</span>
+      </div>
+      <p class="ex__cap">New drugs approved per billion dollars of inflation-adjusted R&amp;D spend <b>halved roughly every nine years</b>, a ~100-fold decline between 1950 and 2010. Named by Scannell et al. (2012): Moore spelled backwards. Cost per approved drug has compounded at <b>8–9% a year in real terms</b> for seven decades. The dashed line is illustrative of a counterfactual, not a claim.</p>
+    </div>
+    <p class="take" style="max-width:34ch">AI will not be the exception <em style="font-style:italic;color:var(--teal)">unless the operating model changes with it.</em></p>
+  </div>
+</section>
+
+<div id="chaps"></div>
+
+<!-- ══════════ SYNTHESIS ══════════ -->
+<section class="syn" id="syn">
+  <div class="shell">
+    <p class="mono kick">The synthesis</p>
+    <h2>Fix ownership and you fix all four</h2>
+    <p class="syn__root">All four are the same challenge wearing different clothes: <em>nobody owns anything end to end.</em> This is why Amazon's single-threaded leadership is the highest-leverage import on the list, and why Challenge 02 is the one to read twice.</p>
+    <div class="dec" id="dec"></div>
+    <table class="tbl">
+      <thead><tr><th>Metric</th><th>Why this one</th><th>Today</th></tr></thead>
+      <tbody>
+        <tr><td>PoC → production conversion</td><td>The only honest test of AI value. Industry base rate is ~5%.</td><td>Not published</td></tr>
+        <tr><td>Work owned vs. supported</td><td>Separates a Portfolio Hub from a Satellite. Only 27% get there in five years.</td><td>Not published</td></tr>
+        <tr><td>Regretted attrition, top decile</td><td>90% of transformation value sits in under 5% of roles.</td><td>Not measured</td></tr>
+        <tr><td>Legacy instances vs. baseline</td><td>~60% of pharma AI partnerships stall on legacy data.</td><td>Not published</td></tr>
+      </tbody>
+    </table>
+    <p class="rule90">If a metric has no owner and no baseline within ninety days, the initiative it measures is not real.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="ft">
+  <div class="shell ft__g">
+    <div><h3>Source register</h3>
+      <p><strong>GCC:</strong> Nasscom–Zinnov <em>GCC Value Orbit</em> (Jul 2026; data Mar 2026): 2,117 GCCs, 2.36M people, $98.4B, maturity split 13/43/39/5, 27% five-year Portfolio Hub rate. Zinnov Salary &amp; Attrition 2026: high-performer attrition 16.5%, AI/cloud tenure 18–24 months, AI/ML increases 21.1%. EY <em>Future of Pay 2026</em>: GCC increments 10.4%, attrition 14.1%.<br><br>
+      <strong>Google:</strong> Potvin &amp; Levenberg, <em>CACM</em> 2016 (monorepo); Tez/Google Pay and UPI volumes Aug 2025; Brain/DeepMind merger 2023.<br><br>
+      <strong>Amazon:</strong> Bryar &amp; Carr, <em>Working Backwards</em>; Wilke and Limp quotations; Bezos API mandate c.2002; AWS Executive Insights.</p></div>
+    <div><h3>&nbsp;</h3>
+      <p><strong>Transformation economics:</strong> Bain, 15 Apr 2024 (12%/88%, dedicated CTO, three failure causes); Bain 90%-of-value-from-5%-of-roles; BCG 2024 (26%); Gartner (38% vs 74% in 2016); Prosci (73% saturation; 88%/12% spread).<br><br>
+      <strong>Pharma:</strong> Scannell et al., <em>Nature Reviews Drug Discovery</em> 2012; OECD; Deloitte 2024 (~$2.6B per NME); Accenture ($1.2–1.7B per treatment); ~60% AI-partnership stall rate; 14.3% first-in-human success rate.<br><br>
+      <strong>Bayer:</strong> corporate DSO materials; PwC Belgium 2026; HBS case Groysberg &amp; Yucaoglu; IMD interview with CTO Michael Lurie, Mar 2026.<br><br>
+      <strong>Takeda:</strong> company releases and FY2025 earnings; ICC Bengaluru launch 15 Jan 2025, 750 target; Capgemini client study (multiple SAP instances); Recursion disclosures.</p></div>
+  </div>
+</footer>
+
+<script>
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const NS='http://www.w3.org/2000/svg';
+const el=(t,a={})=>{const n=document.createElementNS(NS,t);for(const k in a)n.setAttribute(k,a[k]);return n};
+const svg=(w,h)=>el('svg',{viewBox:`0 0 ${w} ${h}`,width:'100%',preserveAspectRatio:'xMidYMid meet',style:`max-height:${h}px`});
+const txt=(x,y,s,o={})=>{const t=el('text',{x,y,fill:o.fill||'#5F6B78','font-family':o.mono?'JetBrains Mono, monospace':(o.disp?'Fraunces, Georgia, serif':'Inter, sans-serif'),'font-size':o.size||11,'font-weight':o.w||500,'text-anchor':o.anchor||'start','letter-spacing':o.ls||(o.mono?'.1em':'0')});t.textContent=s;return t};
+
+/* ═══════════ EXHIBIT A — waffle 88/100 ═══════════ */
+(function(){
+  const W=420,H=250,cols=20,rows=5,g=3,s=(W-(cols-1)*g)/cols;
+  const S=svg(W,H+34);
+  for(let i=0;i<100;i++){
+    const r=el('rect',{x:(i%cols)*(s+g),y:Math.floor(i/cols)*(s+g),width:s,height:s,rx:1.5,
+      fill:i<88?'#D6DBE0':'#00736B'});
+    r.style.transitionDelay=(i*7)+'ms'; S.appendChild(r);
+  }
+  const yb=rows*(s+g)+22;
+  S.appendChild(txt(0,yb,'88 MISS AMBITION',{mono:1,size:10,fill:'#8D97A2'}));
+  S.appendChild(txt(W,yb,'12 SUCCEED',{mono:1,size:10,fill:'#00736B',anchor:'end'}));
+  const gp=el('g',{class:'wf'}); while(S.firstChild) gp.appendChild(S.firstChild); S.appendChild(gp);
+  document.getElementById('exA').appendChild(S);
+})();
+
+/* ═══════════ EXHIBIT B — Eroom's Law ═══════════ */
+(function(){
+  const W=1180,H=430,L=76,R=180,T=28,B=54;
+  const PTS=[[1950,45],[1960,20],[1970,9],[1980,4.5],[1990,2.2],[2000,1.1],[2010,.5]];
+  const px=y=>L+(y-1950)/60*(W-L-R), lo=Math.log10(.4),hi=Math.log10(60);
+  const py=v=>T+(1-(Math.log10(v)-lo)/(hi-lo))*(H-T-B);
+  const S=svg(W,H);
+  [50,10,1].forEach(v=>{
+    S.appendChild(el('line',{x1:L,y1:py(v),x2:W-R,y2:py(v),stroke:'#EEF0F3','stroke-width':1}));
+    S.appendChild(txt(L-12,py(v)+4,String(v),{mono:1,size:10,anchor:'end',fill:'#8D97A2'}));
+  });
+  S.appendChild(txt(L-12,T-10,'DRUGS PER $1B',{mono:1,size:9.5,fill:'#8D97A2'}));
+  S.appendChild(el('line',{x1:L,y1:H-B,x2:W-R,y2:H-B,stroke:'#E2E6EA','stroke-width':1}));
+  [1950,1970,1990,2010].forEach(y=>S.appendChild(txt(px(y),H-B+24,String(y),{mono:1,size:10,anchor:'middle',fill:'#8D97A2'})));
+  // counterfactual
+  let cf=`M ${px(1950)} ${py(45)}`;
+  for(let i=4;i<=60;i+=4) cf+=` L ${px(1950+i)} ${py(45*Math.pow(.978,i))}`;
+  const cp=el('path',{d:cf,fill:'none',stroke:'#00736B','stroke-width':1.8,'stroke-dasharray':'5 5',class:'fadein'});
+  cp.style.transitionDelay='1.5s'; S.appendChild(cp);
+  const cl=el('g',{class:'fadein'}); cl.style.transitionDelay='1.8s';
+  cl.appendChild(txt(px(1998),py(22),'IF THE OPERATING MODEL',{mono:1,size:9.5,fill:'#00736B'}));
+  cl.appendChild(txt(px(1998),py(22)+13,'HAD CHANGED: THE ONE',{mono:1,size:9.5,fill:'#00736B'}));
+  cl.appendChild(txt(px(1998),py(22)+26,'VARIABLE NEVER TESTED',{mono:1,size:9.5,fill:'#00736B'}));
+  S.appendChild(cl);
+  // observed
+  const d=PTS.map((p,i)=>`${i?'L':'M'} ${px(p[0])} ${py(p[1])}`).join(' ');
+  const path=el('path',{d,fill:'none',stroke:'#10161F','stroke-width':2.6,'stroke-linejoin':'round',class:'pathdraw'});
+  S.appendChild(path);
+  PTS.forEach((p,i)=>{const c=el('circle',{cx:px(p[0]),cy:py(p[1]),r:3.6,fill:'#10161F',class:'fadein'});
+    c.style.transitionDelay=(400+i*230)+'ms';S.appendChild(c)});
+  const a1=el('g',{class:'fadein'}); a1.style.transitionDelay='.45s';
+  a1.appendChild(txt(px(1950)+14,py(45)-12,'40–50 drugs per $1B',{disp:1,size:16,w:600,fill:'#10161F'}));
+  a1.appendChild(txt(px(1950)+14,py(45)+5,'EARLY 1950s',{mono:1,size:9.5,fill:'#8D97A2'}));
+  S.appendChild(a1);
+  const a2=el('g',{class:'fadein'}); a2.style.transitionDelay='2.2s';
+  a2.appendChild(txt(px(2010)+16,py(.5)+5,'fewer than 5',{disp:1,size:16,w:600,fill:'#B4451F'}));
+  a2.appendChild(txt(px(2010)+16,py(.5)+22,'BY THE 2000s',{mono:1,size:9.5,fill:'#8D97A2'}));
+  a2.appendChild(el('line',{x1:px(2010)+4,y1:py(.5),x2:px(2010)+12,y2:py(.5),stroke:'#B4451F','stroke-width':1.4}));
+  S.appendChild(a2);
+  document.getElementById('exB').appendChild(S);
+  requestAnimationFrame(()=>path.style.setProperty('--len',path.getTotalLength()));
+})();
+
+/* ═══════════ CONTENT ═══════════ */
+const CH=[
+{n:'01',key:0,id:'c1',title:'The Satellite Trap',
+ take:'A capability centre created with a capability list instead of a product to own becomes, within a decade, a vendor with a company badge.',
+ body:['Work arrives as specifications from headquarters. The centre executes well, is praised for delivery, hires more, and executes more. It never acquires the right to decide anything.',
+ 'Takeda\'s ICC opened in Bengaluru on <strong>15 January 2025</strong> with a target of <strong>750 professionals</strong>, positioned around AI/GenAI, device engineering, data science and visualisation. Every item on that list is a capability. Not one is a product with a named owner and a P&amp;L line.'],
+ ex:'C', exT:'Exhibit C · Where India GCCs actually sit', exS:'Zinnov maturity framework, FY2026',
+ exCap:'Only <b>27% reach Portfolio Hub within five years</b>. The largest cohort by far is Satellite, described in the source as <b>the tier most enterprises outgrow</b>. Outpost means cost arbitrage, where delivery excellence is the ceiling; Transformation Hub means AI-led operations with CXO mandates held from India. Scale comparison beneath: Takeda\'s 750 target against the pharma GCCs that hold global functional accountability.',
+ 
+ rows:[['13%','GCCs at Outpost, where <em>delivery excellence is the ceiling</em>','Zinnov FY2026','cost'],
+ ['43%','at Satellite, the largest cohort, and the one most enterprises outgrow','Zinnov FY2026','cost'],
+ ['27%','reach end-to-end ownership within five years','Nasscom–Zinnov, Jul 2026','cost'],
+ ['~9,000','Novartis Hyderabad associates, where the GCC holds <strong>global functional accountability</strong>','Industry profiles','good'],
+ ['Largest','AstraZeneca\'s India GCC became its biggest globally; India leads its global AI drug discovery','November 2024','good'],
+ ['750','Takeda\'s stated target, roughly 8% of Novartis Hyderabad','Company release','']],
+ iw:'Google, 2017', ik:'The solution, and where it comes from',
+ ib:'Google did not send India a process to run. It handed India a problem the mothership could not solve from outside. <strong>Tez</strong> was not a localisation of Android Pay. It was a new app built specifically for India\'s UPI rails. Tez became <strong>Google Pay</strong>, now a global product.<br><br>The scale of those rails: in August 2025 <strong>UPI processed an average of 644 million transactions a day, against VisaNet\'s 639 million worldwide.</strong> A system built for one country now moves more daily transactions than Visa\'s global core network.',
+ q:'Give the centre a problem, not a process.', qb:'Ownership is earned on something real, but the opportunity must be handed over',
+ earned:'Google India went from established-2004 to <b>10,000+ employees by 2023</b>, engineering headcount projected at 12,000 by 2027, with a $10 billion India Digitisation Fund behind it. The commitment followed demonstrated ownership; it did not precede it.',
+ avoid:'Google\'s centres did not begin with product ownership either. It was won product by product. <strong>The mistake is inverting the sequence: announcing an innovation centre and hoping ownership follows headcount.</strong> That is exactly how 43% of GCCs become Satellites.<br><br>And the translation matters. Tez worked because India was a market Google needed to win; our ICC serves global R&amp;D. So do not copy "India-first product". Copy <strong>India-owned problem</strong>. Hand Bengaluru something headquarters has demonstrably failed to fix. The multi-instance SAP estate is sitting right there.',
+ say:'We have described the ICC as an innovation centre. But right now it has a capability list, not a product. Novartis\'s India MD holds global functional accountability. AstraZeneca\'s India head owns their global AI drug discovery programme. Both were given something to own. Only 27% of GCCs reach end-to-end ownership within five years, and the ones that do decide it on day one, not in year five. We are eighteen months in. So the question isn\'t whether we\'re capable. It\'s what we own.',
+ an:'A Satellite centre is a superb sous-chef who has never been allowed to write a dish. You can hire the best in the country and they will still be executing someone else\'s menu in a decade.'},
+
+{n:'02',key:1,id:'c2',title:'Dependencies, not headcount, are the constraint',
+ take:'When delivery slows, the reflex is to add people. The binding constraint is almost never capacity. It is the number of teams you must coordinate with before you can move.',
+ body:['Adding people to a dependency-bound organisation increases coordination cost faster than it increases output. This is the most expensive misdiagnosis in enterprise transformation, and the one we are closest to making as the ICC scales.',
+ 'Takeda has <strong>three chief-level data and technology mandates</strong>: an enterprise CDTO, an R&amp;D CDTO and an interim CTO, plus business-unit DD&amp;T heads, shared services, and a Transformation Office owning AI. Nobody in that list is doing anything wrong. That is what makes it dangerous.',
+ 'Google is the cautionary tale, not just the model. <strong>Brain and DeepMind spent roughly a decade working the same problems and duplicating each other\'s work.</strong> Two of the best AI organisations on earth. It took a post-ChatGPT code red and a <strong>forced merger in 2023</strong> to resolve. Excellence did not prevent duplication. Only a structural decision did.'],
+ ex:'D', exT:'Exhibit D · Coordination paths, today vs. with interface contracts', exS:'Interactive: select a state',
+ exCap:'Every line is a relationship someone must maintain before work can ship. Point-to-point coordination grows roughly with the square of the participants; routing the same work through a contracted platform layer makes it grow linearly. <b>This is what Bezos\'s API mandate actually bought.</b> Node counts are illustrative of Takeda\'s published structure.',
+
+ rows:[ ['~50%','of Bayer\'s management positions removed; layers cut from 12–13 to 6–7','Bayer, 2024–26','good'],
+ ['95%','of Bayer\'s decisions now made by those closest to the work Eg most day to day decision are not sent upward','PwC, 2026','good'],
+ ['€500M','banked by Bayer in year one against a €2B target','Bayer','good'],
+ ['Twice','the setup tax every pharma programme pays, since each rebuilds its own assays, process and pipeline','R&amp;D transformation research','cost']]},
+
+{n:'03',key:0,id:'c3',title:'The data estate is the precondition, not a parallel workstream',
+ take:'The failure is almost never in the modelling. It is in the estate underneath, and it is discovered at month nine, after the announcement.',
+ body:['AI programmes get funded on the assumption that the data will be there. In pharma it is not, and the gap is not marginal.',
+ 'Our own position: <strong>multiple separate SAP instances</strong>, with S/4HANA still in validation in regulated environments. And we already have <strong>multiple AI-discovery partnerships</strong> in place, capable partners doing real science. The question was never the partners. It is the foundation they plug into.',
+ 'That is not a modelling failure. It is what happens when you buy intelligence and rent the foundation.'],
+ ex:'E', exT:'Exhibit E · The estate, and what it does to AI', exS:'The estate · stall and success rates',
+ exCap:'Each square is a live SAP instance. <b>~60% of pharma AI partnerships stall</b> because data is unstructured, low quality or trapped in legacy systems, and only <b>~5% of integrated enterprise AI pilots</b> extract measurable value. The estate is not a parallel workstream. It is the precondition.',
+ rows:[['~60%','of pharma AI partnerships stall because data is unstructured, low quality or trapped in legacy systems','Industry surveys, 2026','cost'],
+ ['~5%','of integrated enterprise AI pilots extract measurable value','MIT NANDA, Jul 2025','cost'],
+ ['Multiple','separate SAP instances in our estate; S/4HANA still in validation','Client study','cost'],
+ ['14.3%','probability a drug succeeds from first-in-human to market','R&amp;D productivity research',''],
+ ['~$6.16B','of R&amp;D investment per new drug across big pharma, 2001–2020','20-year study, 16 companies','cost'],
+ ['$1.2–1.7B','saved per successful treatment from digital and data-led research','Accenture','good']],
+ iw:'Platforms beat programmes', ik:'The solution, and where it comes from',
+ ib:'Google built Borg, Spanner, BigQuery and Colossus <em>before</em> the product teams that consumed them, and built a discovery layer so engineers could find what existed. Amazon forced interfaces so data had contracts. Neither treated the foundation as a parallel workstream.<br><br>Pharma\'s own diagnosis is sharper: <strong>most companies fund in annual cycles tied to individual programmes, so each programme rebuilds its own assays, its own process and its own data pipeline.</strong><br><br><span style="color:#8B1E12;font-weight:600">That is precisely why durable product teams that own a system end to end outperform the same talent pooled into a functional organisation, such as a Data org or a Data Engineering org, where accountability for any single platform belongs to no one. A team that owns its product carries the foundation forward and amortises it; a function organised by discipline rebuilds that foundation with every new programme.</span><br><br>Capital spreads thin across one-off infrastructure nobody can reuse, and every programme pays the setup tax twice: once when it starts, once when it tries to scale.<br><br>The inversion: fund the platform once and amortise it across the portfolio.',
+ q:'Not sequential. Weighted, and visible.', qb:'40% of ICC capacity to the estate, shipping a data product to a named consumer every quarter',
+ earned:'Accenture puts the prize at <b>$1.2–1.7 billion saved per successful treatment</b> plus $150–450M of revenue opportunity, but only for companies that replatform, automate, change the operating model and reskill <b>simultaneously</b> rather than in sequence.',
+ avoid:'The industry\'s mistake, repeated for seventy years and visible in Eroom\'s Law: <strong>treating each new technology as the answer while leaving the operating model and the data foundation untouched.</strong> New tools layered onto an under-invested data foundation is the current iteration of a very old error.<br><br>But note the counter-correction: a two-year data-only phase gets cancelled in month nine when it produces nothing visible. <strong>Do not sequence it. Weight it.</strong> Majority of capacity, with something shipped every quarter that someone actually uses. Not a migration status report.',
+ say:'Around 60% of pharma AI partnerships stall for one reason: the data is trapped in legacy systems. MIT found only 5% of enterprise AI pilots produce measurable value. We have multiple SAP instances and multiple AI partnerships already in place. I don\'t think the gap is a science problem. It\'s the foundation underneath. So my ask isn\'t more AI budget. It\'s that 40% of ICC capacity goes to the estate, and that it ships something someone uses every quarter.',
+ an:'We are installing a world-class kitchen in a building with no plumbing, and we keep hiring chefs. The chefs are not the problem, and neither is the kitchen.'},
+
+{n:'04',key:0,id:'c4',title:'Talent density beats talent spread',
+ gloss:'<b>What this means.</b> Here “transformation” means growth and improvement, not restructuring. Its success depends far more on keeping a few exceptional people than on treating everyone equally: a small group of exceptional people is worth more than a large number of average contributors.',
+ take:'Transformation resources get allocated politically: a little to everyone, so nobody objects. This feels fair and is quantifiably wrong.',
+ body:['There is a second, quieter failure alongside it: the handful of people who actually carry the transformation get loaded until they leave.',
+ 'Takeda is removing <strong>~4,500 roles in FY2026, roughly 9% of ~49,000 people</strong>, at a ~¥170B restructuring cost, targeting more than ¥200B of annualised savings by FY2028. This follows an FY2024 programme of ~$900M and 4,000+ roles.',
+ 'Here is the risk nobody names. If reductions are executed by layer, by cost centre or by geography (the normal way), you will hit the savings number and simultaneously remove part of the small group that carries most of the value. And because that group is the most employable, they leave voluntarily anyway when the second programme in three years is announced.'],
+ ex:'F', exT:'Exhibit F · Where transformation value actually sits', exS:'Bain & Company',
+ exCap:'<b>90% of transformation value is created by less than 5% of roles.</b> Allocating evenly is not neutral. It is a decision to underfund the 5%. And because that cohort is the most employable, it is also the cohort watching a second reduction programme in three years. Attrition comparison beneath.',
+ rows:[['90%','of transformation value is created by less than 5% of roles','Bain &amp; Company','cost'],
+ ['16.5%','GCC high-performer attrition, above the overall average, and rising','Zinnov 2026','cost'],
+ ['18–24','months: average tenure in Indian GCC AI and cloud roles','Zinnov 2026','cost'],
+ ['21.1%','AI/ML salary increases, against a 9.8% GCC average','Zinnov 2026','cost'],
+ ['14.1%','GCC attrition overall, genuinely better than Indian IT at 20.5%','EY, Feb 2026','good'],
+ ['&gt;half','of high performers are seen as lacking the capabilities for critical roles in 5–10 years','Bain','cost']],
+ iw:'Amazon\'s Bar Raiser', ik:'The solution, and where it comes from',
+ ib:'Amazon\'s <strong>Bar Raiser</strong> places an interviewer from outside the hiring team, with veto power, whose job is the long-run quality bar rather than filling this requisition. It exists precisely to defend talent density against the urgency of a hiring plan, the exact pressure a GCC ramping to 750 is under.<br><br>Google\'s version is structural: experts are led by experts, so technical judgement is not filtered through a general manager. And Bain\'s finding on the successful 12% is the most actionable. They <strong>avoid overloading star players</strong>, because the oversubscribed group burns out, and that group is the under-5% carrying 90% of the value.',
+ q:'Are we retaining the right people, or just enough people?', qb:'Zinnov, on India\'s GCCs, 2026',
+ earned:'The measurable difference between the 12% and the 88% is not strategy quality. Bain\'s three named causes are all about people and roles. <b>Prosci finds projects with excellent change management succeed about 88% of the time versus 12% with poor change management</b>, an eight-fold spread, consistent across industries and company sizes.',
+ avoid:'Bain\'s number-one named cause of failure is failing to focus on critical strategic roles. The version to avoid: <strong>executing 4,500 reductions by layer and cost centre rather than by criticality.</strong> You will hit the number. You may not keep the 5%.<br><br>The second mistake is the FY2024 lesson: running two reduction programmes in three years without changing structure spends down the change-absorption account. <strong>Gartner: willingness to support organisational change has fallen to 38%, from 74% in 2016. Prosci: 73% of organisations are at or beyond change saturation.</strong>',
+ say:'Bain\'s finding is that 90% of transformation value comes from under 5% of roles. If we execute 4,500 reductions by layer and cost centre, we\'ll hit the savings number and we may still remove part of the 5%, because that group is also the most employable, and they\'re watching. Our overall GCC attrition of 14.1% is genuinely good. But high-performer attrition is 16.5% and rising, and AI/ML tenure is now 18 to 24 months. So the number I want isn\'t average attrition. It\'s regretted attrition in the top decile, and I don\'t think we currently measure it.',
+ an:'Spreading transformation budget evenly is like watering every plant in the greenhouse the same amount. It feels fair, and it kills the orchids.'}];
+
+document.getElementById('chaps').innerHTML=CH.map(c=>`
+<section class="chap${c.key?' key':''}" id="${c.id}">
+  <div class="shell">
+    <div class="chap__h"><b>${c.n}</b><div><p class="mono" style="color:var(--ink4);margin-bottom:8px">Challenge</p><h2>${c.title}</h2></div></div>
+    ${c.key?'<span class="keytag">◆ The keystone: read this twice</span>':''}
+    ${c.gloss?`<p class="gloss">${c.gloss}</p>`:''}
+    <p class="take">${c.take}</p>
+    ${c.body.map(b=>`<p class="body prose">${b}</p>`).join('')}
+    <div class="exwrap ex" data-ex="${c.ex}">
+      <div class="ex__top"><span class="ex__t">${c.exT}</span><span class="ex__s">${c.exS}</span></div>
+      <div class="ex__b" id="ex${c.ex}"></div>
+      <p class="ex__cap">${c.exCap}</p>
+    </div>
+    <p class="mono" style="color:var(--ink4)">The numbers</p>
+    <div class="rows">${c.rows.map(([f,t,s,k])=>`<div class="r ${k}"><b class="num">${f}</b><p>${t}</p><cite>${s}</cite></div>`).join('')}</div>
+    ${c.ib?`<div class="insp">
+      <div><p class="mono" style="color:var(--teal)">${c.ik}</p><p class="insp__who">${c.iw}</p></div>
+      <div><p class="insp__body">${c.ib}</p>
+        <p class="quote">${c.q}<span>${c.qb}</span></p>
+        <p class="earned">${c.earned}</p></div>
+    </div>`:''}
+    ${c.avoid?`<div class="avoid"><span class="mono">The mistake made first: do not repeat it</span><p>${c.avoid}</p></div>`:''}
+    ${c.say?`<div class="say"><span class="mono">Say it this way</span><q>${c.say}</q>
+      <p class="analogy"><b>The analogy</b>${c.an}</p></div>`:''}
+  </div>
+</section>`).join('');
+
+document.getElementById('dec').innerHTML=[
+['Give the ICC a problem, not a capability list','Candidate: the multi-instance SAP estate. Named owner, published charter, real authority.'],
+['Appoint three single-threaded leaders, not twelve','Owners with no other job, for separable products. Expand only when a capable owner exists.'],
+['Weight ICC capacity to the estate, 40% minimum','Not sequential. A data product shipped to a named consumer every quarter.'],
+['Measure regretted attrition in the top decile','Build the technical ladder. Concentrate on three to five bets.']
+].map(([h,p],i)=>`<div class="dec__r"><b>${i+1}</b><div><h3>${h}</h3><p>${p}</p></div></div>`).join('');
+
+/* ═══════════ EXHIBIT C — maturity ladder + peer scale ═══════════ */
+(function(){
+  const W=1180,H=300,S=svg(W,H);
+  const T=[['Outpost',13,'#C8CFD6','Cost arbitrage. Delivery excellence is the ceiling.'],
+           ['Satellite',43,'#8D97A2','Capability at scale, the tier most enterprises outgrow.'],
+           ['Portfolio Hub',39,'#00736B','End-to-end ownership from India: product, platform, IP.'],
+           ['Transformation Hub',5,'#10161F','AI-led operations. CXO mandates held from India.']];
+  let x=0; const BW=W, bh=54, gap=3;
+  T.forEach(([name,pct,col,desc],i)=>{
+    const w=(pct/100)*(BW-gap*3);
+    const g=el('g',{}); g.style.cursor='default';
+    const r=el('rect',{x,y:34,width:w,height:bh,fill:col,class:'growx'});
+    r.style.transformOrigin=`${x}px 0`; r.style.transitionDelay=(i*110)+'ms'; g.appendChild(r);
+    const lb=el('g',{class:'fadein'}); lb.style.transitionDelay=(300+i*110)+'ms';
+    const last=i===T.length-1, ax=last?BW:x, an=last?'end':'start';
+    lb.appendChild(txt(ax,26,`${pct}%`,{disp:1,size:19,w:600,anchor:an,fill:col==='#C8CFD6'?'#5F6B78':col}));
+    lb.appendChild(txt(ax,34+bh+20,name.toUpperCase(),{mono:1,size:9.5,anchor:an,fill:'#10161F'}));
+    if(w>190) lb.appendChild(txt(x,34+bh+36,desc,{size:12,fill:'#5F6B78'}));
+    g.appendChild(lb); S.appendChild(g);
+    x+=w+gap;
+  });
+  const m=el('g',{class:'fadein'}); m.style.transitionDelay='1.1s';
+  const mx=(13+43)/100*(BW-9);
+  m.appendChild(el('line',{x1:mx,y1:34,x2:mx,y2:34+bh+52,stroke:'#B4451F','stroke-width':1.6,'stroke-dasharray':'3 3'}));
+  m.appendChild(txt(mx+9,34+bh+62,'ONLY 27% CROSS THIS LINE WITHIN FIVE YEARS',{mono:1,size:10,fill:'#B4451F'}));
+  S.appendChild(m);
+  // peer scale
+  const P=[['Novartis Hyderabad',9000,'#10161F'],['AstraZeneca India',4000,'#10161F'],
+           ['Amgen Hyderabad',3000,'#10161F'],['Takeda ICC (target)',750,'#B4451F']];
+  const y0=196, rowh=25, maxv=9000, pw=BW-260;
+  S.appendChild(txt(0,y0-14,'SCALE COMPARISON · HEADCOUNT',{mono:1,size:9.5,fill:'#8D97A2'}));
+  P.forEach(([n,v,c],i)=>{
+    const y=y0+i*rowh;
+    S.appendChild(txt(0,y+11,n,{size:12.5,fill:'#37414D'}));
+    const bw=v/maxv*pw;
+    const r=el('rect',{x:200,y:y+2,width:bw,height:12,fill:c,rx:1,class:'growx'});
+    r.style.transformOrigin='200px 0'; r.style.transitionDelay=(700+i*90)+'ms'; S.appendChild(r);
+    const t=txt(200+bw+9,y+12,v.toLocaleString(),{mono:1,size:10,fill:c});
+    t.setAttribute('class','fadein'); t.style.transitionDelay=(900+i*90)+'ms'; S.appendChild(t);
+  });
+  document.getElementById('exC').appendChild(S);
+})();
+
+/* ═══════════ EXHIBIT D — dependency graph, interactive ═══════════ */
+(function(){
+  const host=document.getElementById('exD'); if(!host) return;
+  const W=1180,H=440;
+  const wrap=document.createElement('div');
+  const btns=document.createElement('div');
+  btns.style.cssText='display:flex;gap:0;margin-bottom:22px;border:1px solid var(--rule);max-width:100%;flex-wrap:wrap';
+  const mk=(t,on)=>{const b=document.createElement('button');b.textContent=t;
+    b.style.cssText=`font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:11px 16px;border:0;cursor:pointer;flex:1 1 150px;min-width:0;text-align:center;background:${on?'#10161F':'transparent'};color:${on?'#fff':'#5F6B78'};transition:.2s`;
+    return b};
+  const b1=mk('Today · point-to-point',true), b2=mk('With interface contracts',false);
+  btns.append(b1,b2); wrap.appendChild(btns);
+  const S=svg(W,H); wrap.appendChild(S); host.appendChild(wrap);
+
+  const CH_=[{n:'Enterprise CDTO',x:150,y:70},{n:'R&D CDTO',x:430,y:52},{n:'Interim CTO',x:710,y:70},
+             {n:'Transformation Office',x:990,y:52}];
+  const BU=[{n:'Oncology DD&T',x:110,y:400},{n:'R&D DD&T',x:330,y:414},{n:'TBS shared services',x:560,y:400},
+            {n:'ICC Bengaluru',x:790,y:414},{n:'Quality / GxP',x:1020,y:400}];
+  const VD=[{n:'Accenture',x:60,y:236},{n:'AWS',x:250,y:214},{n:'Capgemini',x:440,y:238},
+            {n:'EY',x:630,y:214},{n:'UiPath',x:820,y:238},{n:'TetraScience',x:1010,y:214},{n:'AI vendors',x:1140,y:250}];
+  const ALL=[...CH_,...BU,...VD];
+  const eg=el('g',{}), ng=el('g',{});
+  S.append(eg,ng);
+
+  // state A: dense point-to-point
+  const EA=[];
+  CH_.forEach((c,i)=>BU.forEach((b,j)=>{ if((i+j)%2===0||i===j) EA.push([c,b]); }));
+  BU.forEach((b,j)=>VD.forEach((v,k)=>{ if((j+k)%2===0) EA.push([b,v]); }));
+  CH_.forEach((c,i)=>VD.forEach((v,k)=>{ if((i+k)%3===0) EA.push([c,v]); }));
+  for(let i=0;i<CH_.length;i++)for(let j=i+1;j<CH_.length;j++) EA.push([CH_[i],CH_[j]]);
+  // state B: through a platform layer
+  const HUB={n:'Contracted platform layer · data products + APIs',x:590,y:236};
+  const EB=[...CH_,...BU,...VD].map(n=>[n,HUB]);
+
+  function nodeEl(n,kind){
+    const g=el('g',{class:'fadein'});
+    const isHub=kind==='hub';
+    g.appendChild(el('circle',{cx:n.x,cy:n.y,r:isHub?11:6.5,
+      fill:isHub?'#00736B':(kind==='vd'?'#fff':'#10161F'),
+      stroke:kind==='vd'?'#8D97A2':'none','stroke-width':1.6}));
+    const above=n.y<200;
+    const t=txt(n.x,above?n.y-15:n.y+22,n.n,{size:11.5,anchor:'middle',fill:isHub?'#00736B':'#37414D',w:isHub?600:500});
+    g.appendChild(t); return g;
+  }
+  function render(state){
+    eg.textContent=''; ng.textContent='';
+    const E=state==='a'?EA:EB;
+    E.forEach(([p,q],i)=>{
+      const l=el('line',{x1:p.x,y1:p.y,x2:q.x,y2:q.y,stroke:state==='a'?'#B4451F':'#00736B','stroke-width':1,class:'edge'});
+      l.style.transitionDelay=(i*7)+'ms'; eg.appendChild(l);
+    });
+    if(state==='b') ng.appendChild(nodeEl(HUB,'hub'));
+    CH_.forEach(n=>ng.appendChild(nodeEl(n,'ch')));
+    BU.forEach(n=>ng.appendChild(nodeEl(n,'bu')));
+    VD.forEach(n=>ng.appendChild(nodeEl(n,'vd')));
+    const cnt=el('g',{});
+    cnt.appendChild(txt(W,40,String(E.length),{disp:1,size:34,w:600,anchor:'end',fill:state==='a'?'#B4451F':'#00736B'}));
+    cnt.appendChild(txt(W,58,'COORDINATION PATHS',{mono:1,size:9.5,anchor:'end',fill:'#8D97A2'}));
+    ng.appendChild(cnt);
+    if(host.closest('.ex').classList.contains('in')) requestAnimationFrame(()=>host.closest('.ex').classList.add('in'));
+  }
+  render('a');
+  b1.onclick=()=>{b1.style.background='#10161F';b1.style.color='#fff';b2.style.background='transparent';b2.style.color='#5F6B78';render('a');
+    host.closest('.ex').classList.add('in')};
+  b2.onclick=()=>{b2.style.background='#10161F';b2.style.color='#fff';b1.style.background='transparent';b1.style.color='#5F6B78';render('b');
+    host.closest('.ex').classList.add('in')};
+})();
+
+/* ═══════════ MECHANISM — the arithmetic of coordination (after Challenge 02) ═══════════ */
+(function(){
+  const c2=document.getElementById('c2'); if(!c2) return;
+  const html=`
+<section class="mech" id="mech">
+  <div class="shell">
+    <p class="mono kick">The mechanism beneath Challenge 02</p>
+    <h2>As an organisation grows, <em>talking</em> becomes more expensive than <em>building</em>.</h2>
+    <p class="mech__sub">The API mandate was never really about APIs. It was a mathematical fact: <b>point-to-point coordination grows with the square of the teams.</b> Amazon, Google, Netflix, Uber: every company that re-organised at scale was solving the same equation.</p>
+    <div class="mech__hero ex" data-ex="D2">
+      <div class="mech__chart">
+        <div id="mechChart"></div>
+        <p class="mech__cap"><b>The gap between the two lines is pure coordination tax.</b> Point-to-point paths follow n(n−1)/2, which is quadratic. Route the same work through one contracted platform and every team makes a single connection, which is linear. At fifty teams that is 1,225 relationships against 50.</p>
+      </div>
+      <div class="mech__side">
+        <span class="mono">The arithmetic</span>
+        <table class="qtbl">
+          <thead><tr><th>Teams</th><th>Paths</th></tr></thead>
+          <tbody>
+            <tr><td>2</td><td>1</td></tr>
+            <tr><td>3</td><td>3</td></tr>
+            <tr><td>5</td><td>10</td></tr>
+            <tr><td>10</td><td>45</td></tr>
+            <tr class="hot"><td>20</td><td>190</td></tr>
+            <tr class="hot"><td>50</td><td>1,225</td></tr>
+          </tbody>
+        </table>
+        <div class="mech__insight">
+          <b>2× the teams &rarr; 4× the coordination</b>
+          <span>Double the participants and the paths roughly quadruple. Nobody adds the complexity on purpose. It arrives with size.</span>
+        </div>
+      </div>
+    </div>
+    <div class="mech__cols">
+      <div class="mech__col">
+        <span class="n">01 · The tax</span>
+        <h3>30% building. 70% aligning.</h3>
+        <div class="taxbar"><i class="bd">30% BUILD</i><i class="co">70% COORDINATE</i></div>
+        <p>In a dependency-bound team the bottleneck stops being engineering. It becomes <b>meetings, approvals and follow-ups</b>, the human upkeep behind every line.</p>
+      </div>
+      <div class="mech__col">
+        <span class="n">02 · The fix</span>
+        <h3>A platform is electricity.</h3>
+        <p>You don't renegotiate voltage each time you charge a laptop. <b>Auth, encryption, audit, compliance</b>, provided once by a contracted layer, consumed by all. Coordination collapses from n² to n.</p>
+      </div>
+      <div class="mech__col">
+        <span class="n">03 · The lesson</span>
+        <h3>What actually bought.</h3>
+        <p>Not APIs, but <b>fewer dependencies</b>. Replace repeated human coordination with reusable platforms, standard contracts and clear ownership. Then headcount can grow without communication becoming the ceiling.</p>
+      </div>
+    </div>
+    <p class="mech__punch">This is why <em>dependencies, not headcount,</em> are the real constraint.</p>
+  </div>
+</section>`;
+  c2.insertAdjacentHTML('afterend',html);
+
+  const host=document.getElementById('mechChart'); if(!host) return;
+  const W=760,H=440,L=64,R=92,T=36,B=48;
+  const nMax=50,vMax=1225;
+  const px=n=>L+(n/nMax)*(W-L-R);
+  const py=v=>T+(1-v/vMax)*(H-T-B);
+  const q=n=>n*(n-1)/2;
+  const S=svg(W,H);
+  // grid + y labels
+  [0,300,600,900,1200].forEach(v=>{
+    S.appendChild(el('line',{x1:L,y1:py(v),x2:W-R,y2:py(v),stroke:'#EEF0F3','stroke-width':1}));
+    S.appendChild(txt(L-10,py(v)+4,v.toLocaleString(),{mono:1,size:9.5,anchor:'end',fill:'#8D97A2'}));
+  });
+  S.appendChild(txt(L-10,T-14,'PATHS',{mono:1,size:9,fill:'#8D97A2'}));
+  // x axis
+  S.appendChild(el('line',{x1:L,y1:H-B,x2:W-R,y2:H-B,stroke:'#E2E6EA','stroke-width':1}));
+  [0,10,20,30,40,50].forEach(n=>S.appendChild(txt(px(n),H-B+22,String(n),{mono:1,size:9.5,anchor:'middle',fill:'#8D97A2'})));
+  S.appendChild(txt(px(25),H-B+40,'NUMBER OF TEAMS  ( n )',{mono:1,size:9,anchor:'middle',fill:'#8D97A2'}));
+  // shaded coordination tax
+  let up=`M ${px(0)} ${py(0)}`;
+  for(let n=1;n<=nMax;n++) up+=` L ${px(n)} ${py(q(n))}`;
+  let dn='';
+  for(let n=nMax;n>=0;n--) dn+=` L ${px(n)} ${py(n)}`;
+  const area=el('path',{d:up+dn+' Z',fill:'#B4451F','fill-opacity':.07,class:'fadein'});
+  area.style.transitionDelay='1.3s'; S.appendChild(area);
+  // linear platform line
+  const lin=el('path',{d:`M ${px(0)} ${py(0)} L ${px(nMax)} ${py(nMax)}`,fill:'none',stroke:'#00736B','stroke-width':2.4,class:'fadein'});
+  lin.style.transitionDelay='1.05s'; S.appendChild(lin);
+  // quadratic curve — draws on
+  let qd=`M ${px(0)} ${py(0)}`;
+  for(let n=1;n<=nMax;n++) qd+=` L ${px(n)} ${py(q(n))}`;
+  const quad=el('path',{d:qd,fill:'none',stroke:'#B4451F','stroke-width':2.8,'stroke-linejoin':'round',class:'pathdraw'});
+  S.appendChild(quad);
+  // markers on the quadratic
+  [[3,3],[10,45],[20,190]].forEach(([n,v],i)=>{
+    const c=el('circle',{cx:px(n),cy:py(v),r:4,fill:'#B4451F',class:'fadein'});
+    c.style.transitionDelay=(1500+i*170)+'ms'; S.appendChild(c);
+  });
+  const sl=(n,v,s,i)=>{const t=txt(px(n)+8,py(v)-6,s,{mono:1,size:9.5,fill:'#B4451F'});
+    t.setAttribute('class','fadein'); t.style.transitionDelay=(1650+i*170)+'ms'; S.appendChild(t)};
+  sl(10,45,'10 → 45',0); sl(20,190,'20 → 190',1);
+  // apex dot
+  const ap=el('circle',{cx:px(50),cy:py(1225),r:4.5,fill:'#B4451F',class:'fadein'});
+  ap.style.transitionDelay='2.3s'; S.appendChild(ap);
+  // big endpoint callout
+  const big=el('g',{class:'fadein'}); big.style.transitionDelay='2.4s';
+  big.appendChild(txt(px(22),py(1080),'1,225 paths',{disp:1,size:22,w:600,fill:'#B4451F'}));
+  big.appendChild(txt(px(22),py(1080)+17,'AT 50 TEAMS: EVERYONE TO EVERYONE',{mono:1,size:8.5,fill:'#8D97A2'}));
+  S.appendChild(big);
+  // linear endpoint dot + label
+  const le=el('g',{class:'fadein'}); le.style.transitionDelay='2.6s';
+  le.appendChild(el('circle',{cx:px(50),cy:py(50),r:4,fill:'#00736B'}));
+  le.appendChild(txt(px(50)-8,py(50)-8,'50 with a platform',{mono:1,size:9.5,anchor:'end',fill:'#00736B'}));
+  S.appendChild(le);
+  // formula
+  const f=el('g',{class:'fadein'}); f.style.transitionDelay='2.2s';
+  f.appendChild(txt(px(2),py(1140),'n ( n − 1 ) / 2',{disp:1,size:19,w:600,fill:'#10161F'}));
+  f.appendChild(txt(px(2),py(1140)+16,'POINT-TO-POINT',{mono:1,size:8.5,fill:'#8D97A2'}));
+  S.appendChild(f);
+  host.appendChild(S);
+  requestAnimationFrame(()=>quad.style.setProperty('--len',quad.getTotalLength()));
+})();
+
+/* ═══════════ EXHIBIT E — 72 instances + stall/success ═══════════ */
+(function(){
+  const W=1180,H=250,S=svg(W,H);
+  const cols=24,g=4,s=17;
+  S.appendChild(txt(0,14,'MULTIPLE SAP INSTANCES',{mono:1,size:9.5,fill:'#8D97A2'}));
+  const grid=el('g',{class:'gr'});
+  for(let i=0;i<72;i++){
+    const r=el('rect',{x:(i%cols)*(s+g),y:26+Math.floor(i/cols)*(s+g),width:s,height:s,rx:2,fill:'#B4451F','fill-opacity':.82});
+    r.style.transitionDelay=(i*9)+'ms'; grid.appendChild(r);
+  }
+  S.appendChild(grid);
+  const ax=cols*(s+g)+26, ay=26+1.5*(s+g);
+  const ar=el('g',{class:'fadein'}); ar.style.transitionDelay='.85s';
+  ar.appendChild(el('path',{d:`M ${ax} ${ay} L ${ax+40} ${ay}`,stroke:'#8D97A2','stroke-width':1.4}));
+  ar.appendChild(el('path',{d:`M ${ax+34} ${ay-4} L ${ax+40} ${ay} L ${ax+34} ${ay+4}`,fill:'none',stroke:'#8D97A2','stroke-width':1.4}));
+  ar.appendChild(el('rect',{x:ax+54,y:26,width:74,height:(s+g)*3-g,rx:2,fill:'#00736B'}));
+  ar.appendChild(txt(ax+54+37,26+((s+g)*3-g)/2+5,'ONE',{mono:1,size:11,anchor:'middle',fill:'#fff'}));
+  ar.appendChild(txt(ax+54,26+(s+g)*3+14,'TARGET STATE',{mono:1,size:9.5,fill:'#00736B'}));
+  S.appendChild(ar);
+  // stall / success bars
+  const y0=150, bw=W-320, bh=20;
+  [['~60% of pharma AI partnerships stall on legacy data',60,'#B4451F'],
+   ['~5% of enterprise AI pilots deliver measurable value',5,'#00736B']].forEach(([lab,pct,col],i)=>{
+    const y=y0+i*46;
+    S.appendChild(txt(0,y-7,lab.toUpperCase(),{mono:1,size:9.5,fill:'#8D97A2'}));
+    S.appendChild(el('rect',{x:0,y,width:bw,height:bh,fill:'#EEF0F3',rx:2}));
+    const r=el('rect',{x:0,y,width:bw*pct/100,height:bh,fill:col,rx:2,class:'growx'});
+    r.style.transitionDelay=(1000+i*160)+'ms'; S.appendChild(r);
+    const t=txt(bw+14,y+15,pct+'%',{disp:1,size:19,w:600,fill:col}); t.setAttribute('class','fadein');
+    t.style.transitionDelay=(1200+i*160)+'ms'; S.appendChild(t);
+  });
+  document.getElementById('exE').appendChild(S);
+})();
+
+/* ═══════════ EXHIBIT F — 5% of roles / 90% of value ═══════════ */
+(function(){
+  const W=1180,H=280,S=svg(W,H);
+  const bw=W-300, x0=150;
+  [['ROLES',5,'of all roles','#00736B',40],['TRANSFORMATION VALUE',90,'of value created','#00736B',150]]
+  .forEach(([lab,pct,sub,col,y],i)=>{
+    S.appendChild(txt(0,y+22,lab,{mono:1,size:9.5,fill:'#8D97A2'}));
+    S.appendChild(el('rect',{x:x0,y,width:bw,height:44,fill:'#EEF0F3',rx:2}));
+    const r=el('rect',{x:x0,y,width:bw*pct/100,height:44,fill:col,rx:2,class:'growx'});
+    r.style.transformOrigin=x0+'px 0'; r.style.transitionDelay=(i*380)+'ms'; S.appendChild(r);
+    const t=el('g',{class:'fadein'}); t.style.transitionDelay=(500+i*380)+'ms';
+    const tx=x0+bw*pct/100+16;
+    t.appendChild(txt(tx,y+26,pct+'%',{disp:1,size:30,w:600,fill:col}));
+    t.appendChild(txt(tx,y+43,sub.toUpperCase(),{mono:1,size:9.5,fill:'#8D97A2'}));
+    S.appendChild(t);
+  });
+  const cn=el('g',{class:'fadein'}); cn.style.transitionDelay='1.3s';
+  const lx=x0+bw*.05;
+  cn.appendChild(el('path',{d:`M ${lx} 44 C ${lx} 100, ${x0+bw*.9} 90, ${x0+bw*.9} 150`,
+    fill:'none',stroke:'#00736B','stroke-width':1.2,'stroke-dasharray':'4 4'}));
+  cn.appendChild(txt(x0+bw*.30,120,'AN 18-FOLD CONCENTRATION',{mono:1,size:10,fill:'#00736B'}));
+  S.appendChild(cn);
+  // attrition
+  const y2=232, aw=W-320;
+  S.appendChild(txt(0,y2-8,'ATTRITION · WHO ACTUALLY LEAVES',{mono:1,size:9.5,fill:'#8D97A2'}));
+  [['GCC overall',14.1,'#A8B3BE'],['High performers',16.5,'#B4451F'],['AI & cloud roles',21.5,'#B4451F']]
+  .forEach(([n,v,c],i)=>{
+    const x=i*(aw/3);
+    const t=txt(x,y2+14,n,{size:12,fill:'#37414D'}); S.appendChild(t);
+    S.appendChild(el('rect',{x,y:y2+22,width:aw/3-40,height:8,fill:'#EEF0F3',rx:1}));
+    const r=el('rect',{x,y:y2+22,width:(aw/3-40)*(v/25),height:8,fill:c,rx:1,class:'growx'});
+    r.style.transformOrigin=x+'px 0'; r.style.transitionDelay=(1500+i*110)+'ms'; S.appendChild(r);
+    const vt=txt(x+(aw/3-40)*(v/25)+9,y2+31,v+'%',{mono:1,size:10.5,fill:c});
+    vt.setAttribute('class','fadein'); vt.style.transitionDelay=(1700+i*110)+'ms'; S.appendChild(vt);
+  });
+  document.getElementById('exF').appendChild(S);
+})();
+
+/* ═══════════ TALENT DENSITY — the maths of the few (after Challenge 04) ═══════════ */
+(function(){
+  const c4=document.getElementById('c4'); if(!c4) return;
+  const html=`
+<section class="dens" id="dens">
+  <div class="shell">
+    <p class="mono kick">The mechanism beneath Challenge 04</p>
+    <h2>A few people carry the transformation. Cut evenly, and you cut <em>them</em>.</h2>
+    <p class="dens__sub">Bain's most actionable finding: <b>fewer than 5% of roles create ~90% of the value.</b> At ~49,000 people that is roughly <b>2,450 individuals</b>: the architects, platform and product leads who sit at the point of maximum leverage. Treating every role equally is not neutral. It quietly under-funds the few who matter most.</p>
+
+    <div class="dens__hero ex" data-ex="F2">
+      <div class="dens__lev">
+        <div id="densLev"></div>
+        <p class="dens__cap"><b>Leverage is the whole point.</b> Roughly twenty people build the enterprise AI platform; ten thousand build on top of it. The 5% are not better humans. They occupy the positions where one decision multiplies thousands of others.</p>
+      </div>
+      <div class="dens__funnel">
+        <ul class="fn">
+          <li><b>49,000</b><span>People in the organisation</span></li>
+          <li><i>× 5%, the critical roles ↓</i></li>
+          <li class="hot"><b>≈2,450</b><span>Sit at the point of leverage</span></li>
+          <li class="hot"><b>90%</b><span>Of the transformation value they create</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="dens__cols2 ex" data-ex="F3">
+      <div class="dens__danger">
+        <span class="mono">The blind cut</span>
+        <h3>An even cut looks fair. It cannot see the 5%.</h3>
+        <div id="densCut"></div>
+        <p>Reduce 10% by geography, by department, or by management layer. All three feel fair, and none of them asks <b>"who creates the most value?"</b> Remove two of ten and you may remove the AI architect. The savings target is met; the transformation loses its keystone.</p>
+      </div>
+      <div class="dens__regret">
+        <span class="mono">Regretted attrition</span>
+        <h3>The most valuable are the most employable.</h3>
+        <p>Google, Microsoft, Amazon and every startup want them; they can move in weeks. Announce a second restructuring in three years and they don't wait to be asked. <b>They leave voluntarily.</b> Nobody fired them. They were exactly the people to keep.</p>
+        <div class="dens__stat">16.5%<span>High-performer attrition, and rising · 21.5% in AI &amp; cloud roles</span></div>
+      </div>
+    </div>
+
+    <div class="dens__bar ex" data-ex="F4">
+      <div class="dens__bar-h">
+        <span class="mono">The fix, from Amazon</span>
+        <h3>The Bar Raiser: one outsider with a veto</h3>
+      </div>
+      <div class="dens__bar-g">
+        <div id="densBar"></div>
+        <div class="dens__bar-txt">
+          <p>Every Amazon interview includes one person <b>from outside the hiring team</b>, the Bar Raiser. They don't report to the hiring manager and don't care whether the seat stays empty. They answer a single question: <b>"will this hire raise the average?"</b> If not, they can veto it, even over three yeses.</p>
+          <p class="dens__foot">The analogy: your team urgently needs a striker, and the manager wants to sign whoever is available. The Bar Raiser says <em>"no, we would rather wait than lower the team's quality."</em> That is how talent density is defended against the urgency of a hiring plan, the exact pressure a centre ramping to 750 is under.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="dens__punch">So the number that matters isn't average attrition. It is <em>regretted attrition in the top decile</em>, and today nobody owns it.</p>
+  </div>
+</section>`;
+  c4.insertAdjacentHTML('afterend',html);
+
+  /* leverage — ≈20 build → 10,000 build on top */
+  (function(){
+    const host=document.getElementById('densLev'); if(!host) return;
+    const W=560,H=300,S=svg(W,H);
+    const big=el('g',{class:'fadein'});
+    big.appendChild(txt(0,34,'20 → 10,000',{disp:1,size:28,w:600,fill:'#10161F'}));
+    big.appendChild(txt(2,52,'≈ 20 BUILD THE PLATFORM · 10,000 BUILD ON TOP',{mono:1,size:8.5,fill:'#8D97A2'}));
+    S.appendChild(big);
+    const cx=72,cy=196;
+    const cl=el('g',{class:'fadein'}); cl.style.transitionDelay='.2s';
+    cl.appendChild(txt(40,150,'THE 5%',{mono:1,size:9,fill:'#00736B'}));
+    S.appendChild(cl);
+    const gx=210,gy=118,cols=16,rows=9,sp=16.5,rr=3;
+    const lines=el('g',{});
+    for(let ry=0;ry<rows;ry+=2){
+      const l=el('line',{x1:cx,y1:cy,x2:gx-6,y2:gy+ry*sp,stroke:'#00736B','stroke-width':1,class:'edge'});
+      l.style.transitionDelay=(420+ry*35)+'ms'; lines.appendChild(l);
+    }
+    S.appendChild(lines);
+    const grid=el('g',{});
+    for(let i=0;i<cols*rows;i++){
+      const c=el('circle',{cx:gx+(i%cols)*sp,cy:gy+Math.floor(i/cols)*sp,r:rr,fill:'#8D97A2','fill-opacity':.5,class:'fadein'});
+      c.style.transitionDelay=(650+i*2.5)+'ms'; grid.appendChild(c);
+    }
+    S.appendChild(grid);
+    [[72,183],[54,199],[90,199],[64,216],[82,216]].forEach((p,i)=>{
+      const c=el('circle',{cx:p[0],cy:p[1],r:6,fill:'#00736B',class:'fadein'});
+      c.style.transitionDelay=(250+i*55)+'ms'; S.appendChild(c);
+    });
+    const gl=el('g',{class:'fadein'}); gl.style.transitionDelay='1.1s';
+    gl.appendChild(txt(gx,gy-12,'10,000 BUILD ON WHAT THEY SHIP',{mono:1,size:9,fill:'#8D97A2'}));
+    S.appendChild(gl);
+    host.appendChild(S);
+  })();
+
+  /* blind cut — ten roles, a 20% cut removes two */
+  (function(){
+    const host=document.getElementById('densCut'); if(!host) return;
+    const W=560,H=200,S=svg(W,H);
+    S.appendChild(txt(0,16,'TEN ROLES: A 20% CUT REMOVES TWO, BLIND TO WHICH',{mono:1,size:9,fill:'#8D97A2'}));
+    const y=90,r=17,sp=54,x0=18,crit=4;
+    for(let i=0;i<10;i++){
+      const x=x0+i*sp+r;
+      const c=el('circle',{cx:x,cy:y,r,fill:i<crit?'#00736B':'#D6DBE0',class:'fadein'});
+      c.style.transitionDelay=(i*55)+'ms'; S.appendChild(c);
+    }
+    const lab=el('g',{class:'fadein'}); lab.style.transitionDelay='.7s';
+    lab.appendChild(txt(x0+r,y+46,'FOUR CRITICAL',{mono:1,size:8.5,fill:'#00736B'}));
+    lab.appendChild(txt(x0+crit*sp+r,y+46,'SIX AVERAGE',{mono:1,size:8.5,fill:'#8D97A2'}));
+    S.appendChild(lab);
+    const cut=el('g',{class:'fadein'}); cut.style.transitionDelay='1s';
+    [1,6].forEach(idx=>{
+      const x=x0+idx*sp+r;
+      cut.appendChild(el('line',{x1:x-11,y1:y-11,x2:x+11,y2:y+11,stroke:'#B4451F','stroke-width':2.4}));
+      cut.appendChild(el('line',{x1:x+11,y1:y-11,x2:x-11,y2:y+11,stroke:'#B4451F','stroke-width':2.4}));
+    });
+    const xc=x0+1*sp+r;
+    cut.appendChild(el('circle',{cx:xc,cy:y,r:r+5,fill:'none',stroke:'#B4451F','stroke-width':1.4,'stroke-dasharray':'3 3'}));
+    cut.appendChild(txt(xc,y-34,'AI ARCHITECT,',{mono:1,size:8.5,anchor:'middle',fill:'#B4451F'}));
+    cut.appendChild(txt(xc,y-24,'GONE BY ACCIDENT',{mono:1,size:8.5,anchor:'middle',fill:'#B4451F'}));
+    S.appendChild(cut);
+    host.appendChild(S);
+  })();
+
+  /* bar raiser gate */
+  (function(){
+    const host=document.getElementById('densBar'); if(!host) return;
+    const W=560,H=250,S=svg(W,H);
+    const fl=el('g',{class:'fadein'}); fl.style.transitionDelay='1s';
+    fl.appendChild(el('line',{x1:74,y1:150,x2:150,y2:150,stroke:'#C8CFD6','stroke-width':1.3}));
+    fl.appendChild(el('line',{x1:270,y1:150,x2:342,y2:150,stroke:'#C8CFD6','stroke-width':1.3}));
+    fl.appendChild(el('line',{x1:378,y1:150,x2:452,y2:150,stroke:'#C8CFD6','stroke-width':1.3}));
+    S.appendChild(fl);
+    const cand=el('g',{class:'fadein'});
+    cand.appendChild(el('circle',{cx:50,cy:150,r:16,fill:'#10161F'}));
+    cand.appendChild(txt(50,188,'CANDIDATE',{mono:1,size:8.5,anchor:'middle',fill:'#8D97A2'}));
+    S.appendChild(cand);
+    const team=el('g',{class:'fadein'}); team.style.transitionDelay='.25s';
+    [[172,138],[210,162],[248,138]].forEach(([x,yy])=>{
+      team.appendChild(el('circle',{cx:x,cy:yy,r:12,fill:'#00736B'}));
+      team.appendChild(txt(x,yy+4,'✓',{size:12,anchor:'middle',fill:'#fff',w:600}));
+    });
+    team.appendChild(txt(210,192,'HIRING TEAM · THREE YESES',{mono:1,size:8.5,anchor:'middle',fill:'#00736B'}));
+    S.appendChild(team);
+    const br=el('g',{class:'fadein'}); br.style.transitionDelay='.5s';
+    br.appendChild(txt(360,42,'BAR RAISER',{mono:1,size:8.5,anchor:'middle',fill:'#B4451F'}));
+    br.appendChild(el('circle',{cx:360,cy:66,r:15,fill:'#B4451F'}));
+    br.appendChild(txt(360,96,'FROM OUTSIDE',{mono:1,size:8.5,anchor:'middle',fill:'#8D97A2'}));
+    br.appendChild(el('line',{x1:360,y1:81,x2:360,y2:128,stroke:'#B4451F','stroke-width':1.3,'stroke-dasharray':'3 3'}));
+    br.appendChild(el('rect',{x:351,y:130,width:18,height:40,rx:2,fill:'#B4451F'}));
+    br.appendChild(txt(360,158,'✕',{size:12,anchor:'middle',fill:'#fff',w:600}));
+    S.appendChild(br);
+    const hire=el('g',{class:'fadein'}); hire.style.transitionDelay='.9s';
+    hire.appendChild(el('rect',{x:456,y:132,width:80,height:36,rx:2,fill:'none',stroke:'#8D97A2','stroke-width':1.4,'stroke-dasharray':'4 4'}));
+    hire.appendChild(txt(496,154,'HIRE?',{mono:1,size:10,anchor:'middle',fill:'#8D97A2'}));
+    S.appendChild(hire);
+    const qn=el('g',{class:'fadein'}); qn.style.transitionDelay='1.15s';
+    qn.appendChild(txt(280,230,'ONE QUESTION: DOES THIS HIRE RAISE THE AVERAGE?',{mono:1,size:9,anchor:'middle',fill:'#10161F'}));
+    S.appendChild(qn);
+    host.appendChild(S);
+  })();
+})();
+
+/* ═══════════ REVEALS ═══════════ */
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}
+}),{rootMargin:'0px 0px -8% 0px',threshold:.12});
+document.querySelectorAll('.ex,.r,.speech__l').forEach((n,i)=>{
+  if(n.classList.contains('r')) n.style.transitionDelay=((i%7)*42)+'ms';
+  io.observe(n);
+});
+
+/* count-ups */
+document.querySelectorAll('[data-count]').forEach(n=>{
+  const to=+n.dataset.count; n.textContent=to;
+  if(RM) return;
+  const o=new IntersectionObserver(es=>es.forEach(e=>{
+    if(!e.isIntersecting)return; o.unobserve(e.target);
+    const t0=performance.now(); n.textContent='0';
+    (function tick(t){const p=Math.min(1,(t-t0)/850);
+      n.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(tick)})(t0);
+  }),{threshold:.7}); o.observe(n);
+});
+
+/* index + progress */
+const secs=[['eroom','Eroom’s Law'],['c1','01 Satellite trap'],['c2','02 Dependencies'],
+            ['mech','· Coordination math'],
+            ['c3','03 Data estate'],['c4','04 Talent density'],
+            ['dens','· Talent maths'],
+            ['syn','Synthesis']];
+document.getElementById('idx').innerHTML=secs.map(([id,t])=>`<a href="#${id}" data-s="${id}">${t}</a>`).join('');
+const links=[...document.querySelectorAll('.idx a')], bar=document.getElementById('bar');
+let raf=0;
+addEventListener('scroll',()=>{
+  if(raf)return; raf=requestAnimationFrame(()=>{raf=0;
+    const h=document.documentElement.scrollHeight-innerHeight;
+    bar.style.width=(h>0?Math.min(1,scrollY/h)*100:0)+'%';
+    let cur=-1;
+    secs.forEach(([id],i)=>{const e=document.getElementById(id);
+      if(e&&e.getBoundingClientRect().top<=innerHeight*.4) cur=i});
+    links.forEach((a,i)=>a.setAttribute('aria-current',i===cur?'true':'false'));
+  })},{passive:true});
+</script>
+</body>
+</html>

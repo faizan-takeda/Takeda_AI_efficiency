@@ -587,7 +587,7 @@
         const label=make('text',{x:180,y:158,'text-anchor':'middle',fill:'#ffffff','font-family':'Manrope','font-size':9,'font-weight':800});label.textContent='SHARED';frag.appendChild(label);
         const label2=make('text',{x:180,y:171,'text-anchor':'middle',fill:'#4ad9c6','font-family':'Manrope','font-size':8,'font-weight':700});label2.textContent='CONTRACT';frag.appendChild(label2);
       } else {
-        for(let i=0;i<n;i++) for(let j=i+1;j<n;j++) links.appendChild(make('line',{x1:pts[i].x.toFixed(2),y1:pts[i].y.toFixed(2),x2:pts[j].x.toFixed(2),y2:pts[j].y.toFixed(2),stroke:'#e1261c','stroke-opacity':n>15?.12:.18,'stroke-width':n>15?.75:1}));
+        for(let i=0;i<n;i++) for(let j=i+1;j<n;j++) links.appendChild(make('line',{x1:pts[i].x.toFixed(2),y1:pts[i].y.toFixed(2),x2:pts[j].x.toFixed(2),y2:pts[j].y.toFixed(2),stroke:'#ff817b','stroke-opacity':n>15?.3:.42,'stroke-width':n>15?.75:1}));
       }
       const nodes=make('g'); frag.appendChild(nodes);
       pts.forEach((p,i)=>{
